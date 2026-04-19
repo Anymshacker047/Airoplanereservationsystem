@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - AeroBook</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Admin Specific Overrides */
+        body { background-color: #F1F5F9; }
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar .logo {
+            padding: 0 20px 30px;
+            border-bottom: 1px solid #E2E8F0;
+            margin-bottom: 20px;
+        }
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .nav-links li a {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            color: var(--text-muted);
+            font-weight: 500;
+            gap: 12px;
+            transition: all 0.3s;
+        }
+        .nav-links li a:hover, .nav-links li a.active {
+            background: #EEF2FF;
+            color: var(--primary);
+            border-right: 4px solid var(--primary);
+        }
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+        
+        /* Dashboard Card */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            margin-bottom: 24px;
+        }
+        
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        th {
+            background: #F8FAFC;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        tr:hover {
+            background: #F8FAFC;
+        }
+        .btn-danger {
+            background: #FEF2F2;
+            color: var(--secondary);
+            border: 1px solid #FECDD3;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .btn-danger:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        /* Login Screen */
+        #admin-login {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(79, 70, 229, 0.4)), url('assets/hero_bg.png');
+            background-size: cover;
+        }
+        .login-card {
+            background: white;
+            padding: 40px;
+            border-radius: var(--radius-md);
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Login Screen -->
+    <div id="admin-login">
+        <div class="login-card">
+            <div class="logo" style="justify-content: center; margin-bottom: 20px;">
+                <i class="fa-solid fa-plane-departure"></i>
+                <span>AeroBook Admin</span>
+            </div>
+            <p style="margin-bottom: 24px; color: var(--text-muted);">Enter password to access dashboard</p>
+            <form id="login-form">
+                <div class="form-group" style="text-align: left; margin-bottom: 20px;">
+                    <label for="admin-pass">Password</label>
+                    <input type="password" id="admin-pass" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Login</button>
+            </form>
+            <p id="login-error" style="color: var(--secondary); margin-top: 15px; display: none;">Incorrect password!</p>
+            <a href="index.html" style="display: block; margin-top: 20px; color: var(--primary);">Back to Home</a>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard (Hidden initially) -->
+    <div id="admin-dashboard" class="admin-layout hidden">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-plane-departure"></i>
+                <span>AeroBook</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active" id="admin-nav-flights"><i class="fa-solid fa-plane"></i> Manage Flights</a></li>
+                <li><a href="#" id="admin-nav-bookings"><i class="fa-solid fa-users"></i> Bookings</a></li>
+                <li><a href="#" id="admin-nav-offers"><i class="fa-solid fa-tags"></i> Manage Offers</a></li>
+                <li><a href="#"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                <li style="margin-top: auto;"><a href="#" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            
+            <!-- Flights Section -->
+            <div id="admin-flights-section">
+                <div class="dashboard-header">
+                    <h2>Flight Management</h2>
+                    <button class="btn btn-primary" id="open-add-modal"><i class="fa-solid fa-plus"></i> Add New Flight</button>
+                </div>
+
+                <div class="card">
+                    <h3>All Flights</h3>
+                    <div style="overflow-x: auto; margin-top: 20px;">
+                        <table id="flights-table">
+                            <thead>
+                                <tr>
+                                    <th>Flight ID</th>
+                                    <th>Airline</th>
+                                    <th>Route</th>
+                                    <th>Departure</th>
+                                    <th>Arrival</th>
+                                    <th>Price</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="flights-body">
+                                <!-- Flights populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bookings Section -->
+            <div id="admin-bookings-section" class="hidden">
+                <div class="dashboard-header">
+                    <h2>All Bookings</h2>
+                </div>
+
+                <div class="card">
+                    <h3>Recent Bookings</h3>
+                    <div style="overflow-x: auto; margin-top: 20px;">
+                        <table id="bookings-table">
+                            <thead>
+                                <tr>
+                                    <th>PNR</th>
+                                    <th>Passenger</th>
+                                    <th>Email</th>
+                                    <th>Flight ID</th>
+                                    <th>Route</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookings-body">
+                                <!-- Bookings populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Offers Section -->
+            <div id="admin-offers-section" class="hidden">
+                <div class="dashboard-header">
+                    <h2>Manage Offers</h2>
+                    <button class="btn btn-primary" id="open-add-offer-modal"><i class="fa-solid fa-plus"></i> Add New Offer</button>
+                </div>
+
+                <div class="card">
+                    <h3>Active Promo Codes</h3>
+                    <div style="overflow-x: auto; margin-top: 20px;">
+                        <table id="offers-table">
+                            <thead>
+                                <tr>
+                                    <th>Offer Title</th>
+                                    <th>Promo Code</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="offers-body">
+                                <!-- Offers populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Add Flight Modal -->
+    <div id="add-flight-modal" class="modal hidden">
+        <div class="modal-content glassmorphism">
+            <span class="close-modal">&times;</span>
+            <h2>Add New Flight</h2>
+            
+            <form id="add-flight-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="new-id">Flight ID (e.g. FL-999)</label>
+                        <input type="text" id="new-id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-airline">Airline</label>
+                        <select id="new-airline" required>
+                            <option value="AA">AeroAir</option>
+                            <option value="SH">SkyHigh</option>
+                            <option value="GE">GlobalExpress</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="new-from">From (e.g. DEL)</label>
+                        <input type="text" id="new-from" maxlength="3" style="text-transform: uppercase;" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-to">To (e.g. BOM)</label>
+                        <input type="text" id="new-to" maxlength="3" style="text-transform: uppercase;" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="new-dep">Departure Time</label>
+                        <input type="time" id="new-dep" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-arr">Arrival Time</label>
+                        <input type="time" id="new-arr" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="new-price">Price (₹)</label>
+                        <input type="number" id="new-price" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-stops">Stops</label>
+                        <select id="new-stops">
+                            <option value="Non-stop">Non-stop</option>
+                            <option value="1 Stop">1 Stop</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full mt-4">Save Flight</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Offer Modal -->
+    <div id="add-offer-modal" class="modal hidden">
+        <div class="modal-content glassmorphism">
+            <span class="close-modal" id="close-offer-modal">&times;</span>
+            <h2>Add New Offer</h2>
+            
+            <form id="add-offer-form">
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label for="new-offer-title">Offer Title (e.g. Flat 25% Off)</label>
+                    <input type="text" id="new-offer-title" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label for="new-offer-code">Promo Code (e.g. AEROFEST25)</label>
+                    <input type="text" id="new-offer-code" style="text-transform: uppercase;" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 24px;">
+                    <label for="new-offer-desc">Description</label>
+                    <textarea id="new-offer-desc" rows="3" required style="width: 100%; padding: 14px 16px; border: 1px solid #E2E8F0; border-radius: var(--radius-md); font-family: inherit; resize: vertical;"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full">Save Offer</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="admin.js"></script>
+</body>
+</html>

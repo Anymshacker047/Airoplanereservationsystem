@@ -646,12 +646,274 @@ a {
     }
 }
 
+
+/* Ticket Card Styling */
+.bookings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 24px;
+}
+
+.ticket-card {
+    background: white;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    position: relative;
+    border: 1px solid #E2E8F0;
+}
+
+.ticket-header {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ticket-pnr {
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.ticket-body {
+    padding: 20px;
+}
+
+.ticket-route {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.ticket-city h3 {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+    color: var(--primary);
+}
+
+.ticket-city p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.ticket-flight {
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.ticket-flight i {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin: 8px 0;
+}
+
+.ticket-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed #CBD5E1;
+}
+
+.ticket-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+.ticket-value {
+    font-weight: 600;
+    color: var(--dark);
+}
+
+/* Offers Styling */
+.offers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.offer-card {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 30px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #E2E8F0;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.offer-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+.offer-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1);
+}
+
+.offer-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--secondary), #E11D48);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.offer-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+}
+
+.offer-content p {
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.promo-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #F8FAFC;
+    border: 1px dashed #CBD5E1;
+    padding: 10px 16px;
+    border-radius: var(--radius-md);
+    width: 100%;
+}
+
+.promo-code {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--primary);
+    letter-spacing: 1px;
+}
+
+.btn-copy {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+/* Support Section Styling */
+.support-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.contact-info-panel {
+    background: white;
+    padding: 32px;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #E2E8F0;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.info-item:last-child {
+    margin-bottom: 0;
+}
+
+.info-icon {
+    width: 48px;
+    height: 48px;
+    background: #EEF2FF;
+    color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.info-item h4 {
+    margin-bottom: 4px;
+    font-size: 1.1rem;
+}
+
+.info-item p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.contact-form-panel {
+    padding: 32px;
+    background: white;
+}
+
+.contact-form-panel h3 {
+    margin-bottom: 24px;
+    font-size: 1.5rem;
+}
+
+/* FAQ Styling */
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.faq-card {
+    background: white;
+    padding: 24px;
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--primary);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.faq-card h4 {
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
+
+.faq-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
     .results-layout {
         grid-template-columns: 1fr;
     }
     
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+
     .filters {
         display: flex;
         gap: 24px;
@@ -688,3 +950,45 @@ a {
         display: none;
     }
 }
+
+ / *   S t a t u s   B a d g e s   * / 
+ . b a d g e   { 
+         p a d d i n g :   6 p x   1 2 p x ; 
+         b o r d e r - r a d i u s :   2 0 p x ; 
+         f o n t - s i z e :   0 . 7 5 r e m ; 
+         f o n t - w e i g h t :   7 0 0 ; 
+         t e x t - t r a n s f o r m :   u p p e r c a s e ; 
+         d i s p l a y :   i n l i n e - b l o c k ; 
+ } 
+ 
+ . b a d g e - p e n d i n g   { 
+         b a c k g r o u n d :   # F E F 3 C 7 ; 
+         c o l o r :   # D 9 7 7 0 6 ; 
+ } 
+ 
+ . b a d g e - a c c e p t e d   { 
+         b a c k g r o u n d :   # D 1 F A E 5 ; 
+         c o l o r :   # 0 5 9 6 6 9 ; 
+ } 
+ 
+ . b a d g e - r e j e c t e d   { 
+         b a c k g r o u n d :   # F E E 2 E 2 ; 
+         c o l o r :   # D C 2 6 2 6 ; 
+ } 
+ 
+ . b t n - s u c c e s s   { 
+         b a c k g r o u n d :   # D 1 F A E 5 ; 
+         c o l o r :   # 0 5 9 6 6 9 ; 
+         b o r d e r :   1 p x   s o l i d   # A 7 F 3 D 0 ; 
+         p a d d i n g :   6 p x   1 2 p x ; 
+         f o n t - s i z e :   0 . 8 5 r e m ; 
+         b o r d e r - r a d i u s :   6 p x ; 
+         c u r s o r :   p o i n t e r ; 
+ } 
+ 
+ . b t n - s u c c e s s : h o v e r   { 
+         b a c k g r o u n d :   # 0 5 9 6 6 9 ; 
+         c o l o r :   w h i t e ; 
+ } 
+  
+ 
