@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroBook - Premium Airplane Reservation</title>
+    <meta name="description" content="Book your next flight with AeroBook. Premium airplane reservation system.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header id="main-header">
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fa-solid fa-plane-departure"></i>
+                <span>AeroBook</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">My Bookings</a></li>
+                    <li><a href="#">Offers</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <button class="btn btn-outline">Log In</button>
+                <button class="btn btn-primary">Sign Up</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section with Flight Search -->
+        <section id="hero">
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <h1>Let Your Dreams Take Flight</h1>
+                    <p>Discover the world with premium comfort and unbeatable prices.</p>
+                </div>
+                
+                <div class="search-widget glassmorphism">
+                    <div class="trip-types">
+                        <label class="radio-label">
+                            <input type="radio" name="trip-type" value="one-way" checked>
+                            <span>One Way</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="trip-type" value="round-trip">
+                            <span>Round Trip</span>
+                        </label>
+                    </div>
+                    
+                    <form id="flight-search-form">
+                        <div class="form-group">
+                            <label for="source"><i class="fa-solid fa-location-dot"></i> From</label>
+                            <input type="text" id="source" placeholder="City or Airport" required>
+                        </div>
+                        
+                        <div class="exchange-icon">
+                            <i class="fa-solid fa-right-left"></i>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="destination"><i class="fa-solid fa-location-dot"></i> To</label>
+                            <input type="text" id="destination" placeholder="City or Airport" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="date"><i class="fa-regular fa-calendar"></i> Departure</label>
+                            <input type="date" id="date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="passengers"><i class="fa-solid fa-user"></i> Passengers</label>
+                            <select id="passengers">
+                                <option value="1">1 Adult</option>
+                                <option value="2">2 Adults</option>
+                                <option value="3">3 Adults</option>
+                                <option value="4">4 Adults</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-large search-btn">
+                            <i class="fa-solid fa-magnifying-glass"></i> Search Flights
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flight Results Section -->
+        <section id="results" class="hidden">
+            <div class="container">
+                <div class="results-header">
+                    <h2>Available Flights</h2>
+                    <p id="results-summary">Showing flights from <span id="summary-source">...</span> to <span id="summary-destination">...</span> on <span id="summary-date">...</span></p>
+                </div>
+                
+                <div class="results-layout">
+                    <aside class="filters">
+                        <h3>Filters</h3>
+                        <!-- Mock filters -->
+                        <div class="filter-group">
+                            <h4>Stops</h4>
+                            <label><input type="checkbox" checked> Non-stop</label>
+                            <label><input type="checkbox" checked> 1 Stop</label>
+                        </div>
+                        <div class="filter-group">
+                            <h4>Airlines</h4>
+                            <label><input type="checkbox" checked> AeroAir</label>
+                            <label><input type="checkbox" checked> SkyHigh</label>
+                        </div>
+                    </aside>
+                    
+                    <div class="flight-list" id="flight-list-container">
+                        <!-- Flight cards will be generated here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="modal hidden">
+        <div class="modal-content glassmorphism">
+            <span class="close-modal">&times;</span>
+            <h2>Complete Your Booking</h2>
+            
+            <div class="selected-flight-summary" id="selected-flight-summary">
+                <!-- Flight details will be shown here -->
+            </div>
+            
+            <form id="booking-form">
+                <h3>Passenger Details</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full">Confirm Booking & Pay</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal hidden">
+        <div class="modal-content glassmorphism text-center">
+            <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <h2>Booking Confirmed!</h2>
+            <p>Your ticket has been booked successfully. A confirmation email has been sent.</p>
+            <div class="ticket-details" id="ticket-details">
+                <!-- Ticket info -->
+            </div>
+            <button id="close-success" class="btn btn-primary mt-4">Back to Home</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
