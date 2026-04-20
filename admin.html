@@ -163,7 +163,7 @@
                 <li><a href="#" class="active" id="admin-nav-flights"><i class="fa-solid fa-plane"></i> Manage Flights</a></li>
                 <li><a href="#" id="admin-nav-bookings"><i class="fa-solid fa-users"></i> Bookings</a></li>
                 <li><a href="#" id="admin-nav-offers"><i class="fa-solid fa-tags"></i> Manage Offers</a></li>
-                <li><a href="#"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                <li><a href="#" id="admin-nav-settings"><i class="fa-solid fa-gear"></i> Settings</a></li>
                 <li style="margin-top: auto;"><a href="#" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
             </ul>
         </aside>
@@ -226,6 +226,32 @@
                             </thead>
                             <tbody id="bookings-body">
                                 <!-- Bookings populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="admin-settings-section" class="hidden">
+                <div class="dashboard-header">
+                    <h2>Settings & User Management</h2>
+                </div>
+
+                <div class="card">
+                    <h3>Registered Users</h3>
+                    <div style="overflow-x: auto; margin-top: 20px;">
+                        <table id="users-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Password</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-body">
+                                <!-- Users populated by JS -->
                             </tbody>
                         </table>
                     </div>

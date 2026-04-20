@@ -23,13 +23,16 @@ const addFlightForm = document.getElementById('add-flight-form');
 const navFlights = document.getElementById('admin-nav-flights');
 const navBookings = document.getElementById('admin-nav-bookings');
 const navOffers = document.getElementById('admin-nav-offers');
+const navSettings = document.getElementById('admin-nav-settings');
 
 const flightsSection = document.getElementById('admin-flights-section');
 const bookingsSection = document.getElementById('admin-bookings-section');
 const offersSection = document.getElementById('admin-offers-section');
+const settingsSection = document.getElementById('admin-settings-section');
 
 const bookingsTableBody = document.getElementById('bookings-body');
 const offersTableBody = document.getElementById('offers-body');
+const usersTableBody = document.getElementById('users-body');
 
 const addOfferModal = document.getElementById('add-offer-modal');
 const openAddOfferBtn = document.getElementById('open-add-offer-modal');
@@ -73,6 +76,14 @@ function saveOffers(offers) {
     localStorage.setItem('offersData', JSON.stringify(offers));
 }
 
+function getUsers() {
+    return JSON.parse(localStorage.getItem('users')) || [];
+}
+
+function saveUsers(users) {
+    localStorage.setItem('users', JSON.stringify(users));
+}
+
 // --- Login Logic ---
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -102,41 +113,51 @@ function showDashboard() {
 }
 
 // --- Navigation Logic ---
-navFlights.addEventListener('click', (e) => {
-    e.preventDefault();
-    navFlights.classList.add('active');
+function resetNavAndSections() {
+    navFlights.classList.remove('active');
     navBookings.classList.remove('active');
     navOffers.classList.remove('active');
+    if(navSettings) navSettings.classList.remove('active');
     
-    flightsSection.classList.remove('hidden');
+    flightsSection.classList.add('hidden');
     bookingsSection.classList.add('hidden');
     offersSection.classList.add('hidden');
+    if(settingsSection) settingsSection.classList.add('hidden');
+}
+
+navFlights.addEventListener('click', (e) => {
+    e.preventDefault();
+    resetNavAndSections();
+    navFlights.classList.add('active');
+    flightsSection.classList.remove('hidden');
     renderFlightsTable();
 });
 
 navBookings.addEventListener('click', (e) => {
     e.preventDefault();
+    resetNavAndSections();
     navBookings.classList.add('active');
-    navFlights.classList.remove('active');
-    navOffers.classList.remove('active');
-    
     bookingsSection.classList.remove('hidden');
-    flightsSection.classList.add('hidden');
-    offersSection.classList.add('hidden');
     renderBookingsTable();
 });
 
 navOffers.addEventListener('click', (e) => {
     e.preventDefault();
+    resetNavAndSections();
     navOffers.classList.add('active');
-    navFlights.classList.remove('active');
-    navBookings.classList.remove('active');
-    
     offersSection.classList.remove('hidden');
-    flightsSection.classList.add('hidden');
-    bookingsSection.classList.add('hidden');
     renderOffersTable();
 });
+
+if (navSettings) {
+    navSettings.addEventListener('click', (e) => {
+        e.preventDefault();
+        resetNavAndSections();
+        navSettings.classList.add('active');
+        settingsSection.classList.remove('hidden');
+        renderUsersTable();
+    });
+}
 
 // --- Dashboard Logic ---
 
@@ -379,5 +400,49 @@ function deleteOffer(index) {
         offers.splice(index, 1);
         saveOffers(offers);
         renderOffersTable();
+    }
+}
+
+// --- Manage Users Logic ---
+function renderUsersTable() {
+    if (!usersTableBody) return;
+    const users = getUsers();
+    usersTableBody.innerHTML = '';
+    
+    if (users.length === 0) {
+        usersTableBody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 20px;">No registered users.</td></tr>';
+        return;
+    }
+    
+    users.forEach((user, index) => {
+        const tr = document.createElement('tr');
+        const passLength = user.password ? user.password.length : 6;
+        
+        tr.innerHTML = `
+            <td><strong>${user.name}</strong></td>
+            <td>${user.email}</td>
+            <td>${'*'.repeat(passLength)}</td>
+            <td>
+                <button class="btn-danger delete-user-btn" data-index="${index}">
+                    <i class="fa-solid fa-trash"></i> Delete
+                </button>
+            </td>
+        `;
+        usersTableBody.appendChild(tr);
+    });
+    
+    document.querySelectorAll('.delete-user-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            deleteUser(this.getAttribute('data-index'));
+        });
+    });
+}
+
+function deleteUser(index) {
+    if (confirm('Are you sure you want to delete this user?')) {
+        const users = getUsers();
+        users.splice(index, 1);
+        saveUsers(users);
+        renderUsersTable();
     }
 }

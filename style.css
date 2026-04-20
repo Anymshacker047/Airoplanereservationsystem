@@ -1,25 +1,29 @@
 /* style.css */
 :root {
     /* Color Palette - Vibrant & Premium */
-    --primary: #4F46E5; /* Indigo */
+    --primary: #4F46E5;
+    /* Indigo */
     --primary-light: #818CF8;
     --primary-dark: #3730A3;
-    --secondary: #F43F5E; /* Rose */
-    --dark: #1E293B; /* Slate 800 */
-    --light: #F8FAFC; /* Slate 50 */
+    --secondary: #F43F5E;
+    /* Rose */
+    --dark: #1E293B;
+    /* Slate 800 */
+    --light: #F8FAFC;
+    /* Slate 50 */
     --text-main: #334155;
     --text-muted: #64748B;
-    
+
     /* UI Elements */
     --glass-bg: rgba(255, 255, 255, 0.85);
     --glass-border: rgba(255, 255, 255, 0.4);
     --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
-    
+
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 24px;
     --radius-full: 9999px;
-    
+
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -44,7 +48,10 @@ body {
 }
 
 /* Typography */
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
     color: var(--dark);
     font-weight: 700;
 }
@@ -174,7 +181,8 @@ a {
     position: relative;
 }
 
-.main-nav a:hover, .main-nav a.active {
+.main-nav a:hover,
+.main-nav a.active {
     color: var(--primary);
 }
 
@@ -189,7 +197,8 @@ a {
     transition: var(--transition);
 }
 
-.main-nav a:hover::after, .main-nav a.active::after {
+.main-nav a:hover::after,
+.main-nav a.active::after {
     width: 100%;
 }
 
@@ -304,7 +313,8 @@ a {
     margin-right: 4px;
 }
 
-.form-group input, .form-group select {
+.form-group input,
+.form-group select {
     width: 100%;
     padding: 14px 16px;
     border: 1px solid #E2E8F0;
@@ -316,7 +326,8 @@ a {
     transition: var(--transition);
 }
 
-.form-group input:focus, .form-group select:focus {
+.form-group input:focus,
+.form-group select:focus {
     outline: none;
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
@@ -610,7 +621,8 @@ a {
 
 .success-icon {
     font-size: 4rem;
-    color: #10B981; /* Emerald */
+    color: #10B981;
+    /* Emerald */
     margin-bottom: 16px;
 }
 
@@ -629,6 +641,7 @@ a {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -640,6 +653,7 @@ a {
         opacity: 0;
         transform: translateY(-30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -909,7 +923,7 @@ a {
     .results-layout {
         grid-template-columns: 1fr;
     }
-    
+
     .faq-grid {
         grid-template-columns: 1fr;
     }
@@ -918,7 +932,7 @@ a {
         display: flex;
         gap: 24px;
     }
-    
+
     .filters h3 {
         display: none;
     }
@@ -928,67 +942,27 @@ a {
     .hero-text h1 {
         font-size: 2.5rem;
     }
-    
+
     .flight-card {
         flex-direction: column;
         gap: 24px;
     }
-    
-    .airline-info, .flight-price {
+
+    .airline-info,
+    .flight-price {
         width: 100%;
         text-align: center;
         justify-content: center;
     }
-    
+
     .flight-price {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-    
-    .main-nav, .user-actions {
+
+    .main-nav,
+    .user-actions {
         display: none;
     }
 }
-
- / *   S t a t u s   B a d g e s   * / 
- . b a d g e   { 
-         p a d d i n g :   6 p x   1 2 p x ; 
-         b o r d e r - r a d i u s :   2 0 p x ; 
-         f o n t - s i z e :   0 . 7 5 r e m ; 
-         f o n t - w e i g h t :   7 0 0 ; 
-         t e x t - t r a n s f o r m :   u p p e r c a s e ; 
-         d i s p l a y :   i n l i n e - b l o c k ; 
- } 
- 
- . b a d g e - p e n d i n g   { 
-         b a c k g r o u n d :   # F E F 3 C 7 ; 
-         c o l o r :   # D 9 7 7 0 6 ; 
- } 
- 
- . b a d g e - a c c e p t e d   { 
-         b a c k g r o u n d :   # D 1 F A E 5 ; 
-         c o l o r :   # 0 5 9 6 6 9 ; 
- } 
- 
- . b a d g e - r e j e c t e d   { 
-         b a c k g r o u n d :   # F E E 2 E 2 ; 
-         c o l o r :   # D C 2 6 2 6 ; 
- } 
- 
- . b t n - s u c c e s s   { 
-         b a c k g r o u n d :   # D 1 F A E 5 ; 
-         c o l o r :   # 0 5 9 6 6 9 ; 
-         b o r d e r :   1 p x   s o l i d   # A 7 F 3 D 0 ; 
-         p a d d i n g :   6 p x   1 2 p x ; 
-         f o n t - s i z e :   0 . 8 5 r e m ; 
-         b o r d e r - r a d i u s :   6 p x ; 
-         c u r s o r :   p o i n t e r ; 
- } 
- 
- . b t n - s u c c e s s : h o v e r   { 
-         b a c k g r o u n d :   # 0 5 9 6 6 9 ; 
-         c o l o r :   w h i t e ; 
- } 
-  
- 
